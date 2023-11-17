@@ -1,7 +1,11 @@
-const resetGameButton = document.querySelector<HTMLButtonElement>('.js-button');
+const resetGameButton: HTMLButtonElement = document.querySelector<HTMLButtonElement>('.js-button');
+const startGameButton: HTMLButtonElement = document.querySelector<HTMLButtonElement>('.js-start_game');
+const hiddenElements: NodeListOf<Element> = document.querySelectorAll<HTMLElement>('.box__hidden');
 
-const contentArray: string[] = ['🍇🍇', '🍇🍇', '🍉🍉', '🍉🍉', '🍐🍐',
-  '🍐🍐', '🍌BANANA🍌', '🍌BANANA🍌', '🍎APPLE🍎', '🍎APPLE🍎', '🥭MANGO🥭', '🥭MANGO🥭'];
+const contentArray: string[] = ['🍇GRAPE🍇', '🍇GRAPE🍇', '🍉MELON🍉', '🍉MELON🍉', '🍐PEAR🍐',
+  '🍐PEAR🍐', '🍌BANANA🍌', '🍌BANANA🍌', '🍎APPLE🍎', '🍎APPLE🍎', '🥭MANGO🥭', '🥭MANGO🥭'];
+
+const colors = ['#F2CEE6', '#C3DBC5', '#E8DCB9', '#E3A587', '#8FBFE0', '#7A89C2', '#EAE0CC', '#C5DAC1', '#B6A6CA', '#DEF2C8'];
 
 const randomizedContent: string[] = contentArray.sort(() => {
   if (Math.random() > 0.5) {
@@ -16,30 +20,55 @@ for (let i = 0; i < contentArray.length; i++) {
   box.innerHTML = randomizedContent[i];
   document.querySelector('.box__game').appendChild(box);
 
-  box.onclick = function (event) {
+  box.addEventListener('click', (event) => {
     const clickedBox = event.currentTarget as HTMLDivElement;
     clickedBox.classList.add('box__show');
 
     setTimeout(() => {
-      if (document.querySelectorAll('.box__show').length > 1) {
-        if (document.querySelectorAll('.box__show')[0].innerHTML === document.querySelectorAll('.box__show')[1].innerHTML) {
-          document.querySelectorAll('.box__show')[0].classList.add('box__equal');
-          document.querySelectorAll('.box__show')[1].classList.add('box__equal');
+      const showElements = document.querySelectorAll('.box__show');
+      if (showElements.length > 1) {
+        const [firstBox, secondBox] = showElements;
 
-          document.querySelectorAll('.box__show')[1].classList.remove('box__show');
-          document.querySelectorAll('.box__show')[0].classList.remove('box__show');
+        if (firstBox.innerHTML === secondBox.innerHTML) {
+          firstBox.classList.add('box__equal');
+          secondBox.classList.add('box__equal');
+
+          secondBox.classList.remove('box__show');
+          firstBox.classList.remove('box__show');
 
           if (document.querySelectorAll('.box__equal').length === contentArray.length) {
-            alert('YOU WON!');
+            startGameButton.innerHTML = '🥳 CONGRATULATIONS! 🥳';
+            startGameButton.disabled = true;
+            startGameButton.addEventListener('mouseenter', () => {
+              startGameButton.style.opacity = '1';
+            });
+            setInterval(() => {
+              const randomColor = colors[Math.floor(Math.random() * colors.length)];
+              startGameButton.style.backgroundColor = randomColor;
+            }, 500);
           }
         } else {
-          document.querySelectorAll('.box__show')[1].classList.remove('box__show');
-          document.querySelectorAll('.box__show')[0].classList.remove('box__show');
+          secondBox.classList.remove('box__show');
+          firstBox.classList.remove('box__show');
         }
       }
     }, 500);
-  };
+  });
 }
+startGameButton.addEventListener('click', () => {
+  hiddenElements.forEach((element) => {
+    element.classList.remove('box__hidden');
+  });
+  startGameButton.innerHTML = 'MEMORY GAME';
+});
+
+startGameButton.addEventListener('mouseenter', () => {
+  startGameButton.style.opacity = '0.8';
+});
+
+startGameButton.addEventListener('mouseleave', () => {
+  startGameButton.style.opacity = '1';
+});
 
 resetGameButton.addEventListener('click', () => {
   document.location.reload();

@@ -22,12 +22,20 @@ body {
   gap: 30px;
   background-color: #DABECA;
   padding: 30px 100px;
+  border-radius: 10px;
 }
 
 .box__header {
-  font-size: 50px;
-  letter-spacing: 9px;
-  margin: 20px 0 0 0 ;
+  padding: 20px 20px 15px 20px;
+  font-family: 'Bebas Neue', sans-serif;;
+  font-size: 45px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: #BF8B85;
+  color: rgb(39, 38, 38);
+  letter-spacing: 3px;
+  margin: 0 0 0px 0;
 }
 
 .box__reset {
@@ -67,7 +75,6 @@ body {
   align-items: center;
   font-size: 25px;
   background-color: #E7D6DE;
-  transform: rotateY(180deg);
   transition: 0.25s;
   border-radius: 10px;
 }
@@ -92,5 +99,7 @@ body {
   transform: rotateY(180deg);
 }
 
-
+.box__hidden {
+  display: none;
+}
 
