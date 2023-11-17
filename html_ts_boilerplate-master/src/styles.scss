@@ -19,7 +19,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 0px;
   background-color: #DABECA;
   padding: 30px 100px;
   border-radius: 10px;
@@ -35,7 +35,7 @@ body {
   background-color: #BF8B85;
   color: rgb(39, 38, 38);
   letter-spacing: 3px;
-  margin: 0 0 0px 0;
+  margin: 0;
 }
 
 .box__reset {
@@ -48,6 +48,7 @@ body {
   background-color: #BF8B85;
   color: rgb(39, 38, 38);
   letter-spacing: 3px;
+  margin: 10px 0 0 0;
 }
 
 .box__reset:focus {
@@ -103,3 +104,23 @@ body {
   display: none;
 }
 
+.stopwatch-wrapper {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.stopwatch {
+  font-size: 22px;
+  margin: 10px 0 0 0;
+}
+
+.js-counter {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
